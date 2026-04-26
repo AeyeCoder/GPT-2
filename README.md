@@ -41,7 +41,6 @@ To run inference, the compiled model weights are stripped of their compile prefi
 # Python
 import torch
 from transformers import GPT2Tokenizer
-# Load architecture and tokenizer
 model = GPT(GPTConfig(vocab_size=50304))
 state_dict = torch.load('model_best_final.pt')
 state_dict = {k.replace('_orig_mod.', ''): v for k, v in state_dict.items()}
@@ -52,7 +51,6 @@ tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 prompt = "Hi Everyone, I'm a Language Model. AI is taking over the world and "
 tokens = torch.tensor([tokenizer.encode(prompt)], dtype=torch.long).to("cuda")
 
-# Generate text
 with torch.no_grad():
     for _ in range(50):
         logits, _ = model(tokens)
