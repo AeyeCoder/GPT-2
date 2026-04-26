@@ -27,11 +27,11 @@ Fused AdamW: Used the fused implementation of the AdamW optimizer to reduce the 
 Mixed Precision: Handled via PyTorch autocast to keep the memory footprint small while maintaining numerical stability.
 
 # Training Results
-The model was trained using a cosine learning rate decay schedule (peaking around ~4e-4).
+The model was trained using a cosine learning rate decay schedule (peaking around ~1e-3).
 
 Initial Loss: Started at ~10.97.
 
-Final Validation Loss: Dropped steadily down to ~3.5 by the end of the logged steps.
+Final Validation Loss: Dropped steadily down to ~3.5 by the end of the logged steps. It could go even better with more compute + data (basic scaling law)
 
 Checkpoints: The best model weights were saved dynamically whenever validation loss reached a new low (model_best_final.pt).
 
