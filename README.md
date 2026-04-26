@@ -38,24 +38,6 @@ Checkpoints: The best model weights were saved dynamically whenever validation l
 # Inference
 To run inference, the compiled model weights are stripped of their compile prefixes and loaded into the base GPT architecture.
 
-# Python
-import torch
-from transformers import GPT2Tokenizer
-model = GPT(GPTConfig(vocab_size=50304))
-state_dict = torch.load('model_best_final.pt')
-state_dict = {k.replace('_orig_mod.', ''): v for k, v in state_dict.items()}
-model.load_state_dict(state_dict)
-model.to("cuda").eval()
+# Reference
 
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-prompt = "Hi Everyone, I'm a Language Model. AI is taking over the world and "
-tokens = torch.tensor([tokenizer.encode(prompt)], dtype=torch.long).to("cuda")
-
-with torch.no_grad():
-    for _ in range(50):
-        logits, _ = model(tokens)
-        probs = torch.softmax(logits[0, -1], dim=-1)
-        next_token = torch.multinomial(probs, num_samples=1)
-        tokens = torch.cat([tokens, next_token.unsqueeze(0)], dim=1)
-
-print(tokenizer.decode(tokens[0].tolist()))
+Single most Import reference : Lets reproduce GPT-2(124M) by andrej karpathy on YT!
